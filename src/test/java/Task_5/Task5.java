@@ -1,7 +1,8 @@
 package Task_5;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.openqa.selenium.Dimension;
+import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,17 +15,27 @@ import org.testng.annotations.DataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Task5 {
     WebDriver driver = null;
+
+
+
     @BeforeTest
     public void setUP(){
+        System.setProperty("webdriver.chrome.driver","/QAhw/src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().window().fullscreen();
+        driver.manage().window().maximize();
+
+
+
     }
     @Test(dataProvider = "data")
-    public void smokeTest(String calcRoomw, String calcRoomh, String calcLamh, String calcLamw, String calcIn, String calcPr, String calcB, String calcW, List<String>expectedData) {
+    public void smokeTest(String calcRoomw, String calcRoomh, String calcLamh, String calcLamw, String calcIn, String calcPr, String calcB, String calcW,
+                          List<String>expectedData)  {
         driver.get("https://masterskayapola.ru/kalkulyator/laminata.html");
+
         WebElement calcRoomwidth = driver.findElement(By.name("calc_roomwidth"));
         WebElement calcRoomheight = driver.findElement(By.name("calc_roomheight"));
         WebElement calcLamwidth = driver.findElement(By.name("calc_lamwidth"));
@@ -38,13 +49,15 @@ public class Task5 {
         WebElement lamcalc = driver.findElement(By.cssSelector("[type = 'button']"));
         List<WebElement> results = driver.findElements(By.xpath("//form[@id='inputcalc']/div/div[4]/div"));
 
+
+
         calcRoomwidth.sendKeys(calcRoomw);
         calcRoomheight.sendKeys(calcRoomh);
         calcLamheight.sendKeys(calcLamh);
         calcLamwidth.sendKeys(calcLamw);
         calcInpack.sendKeys(calcIn);
         calcPrice.sendKeys(calcPr);
-        selectDirect.selectByValue("По ширине комнаты");
+        selectDirect.selectByValue("tow");
         calcBias.sendKeys(calcB);
         calcWalldist.sendKeys(calcW);
         lamcalc.click();
@@ -52,26 +65,31 @@ public class Task5 {
             results.forEach((element) -> add(element.getText()));
         }};
         Assert.assertEquals(actualData, expectedData);
+
+
+
     }
 
         @DataProvider(name = "data")
         private Object[][] getData() {
             return new Object[][]{
-                    {"5", "6", "5", "163", "8", "8", "18", "9", "75", new ArrayList<String>() {{
-                        add("Площадь укладки:");
-                        add("Кол-во панелей:");
-                        add("Кол-во упаковок:");
-                        add("Стоимость:");
-                        add("Остатки:");
-                        add("Отрезки:");
+                    {"7", "3", "100", "147", "52", "8200", "50", "2", new ArrayList<String>() {{
+                        add("РЕЗУЛЬТАТ РАСЧЕТА:");
+                        add("Площадь укладки: 145.04 м2.");
+                        add("Кол-во панелей: 31 шт.");
+                        add("Кол-во упаковок: 1 шт.");
+                        add("Стоимость: 500000000 руб.");
+                        add("Остатки: 69 шт.");
+                        add("Отрезки: 7 шт.");
                     }}},
-                    {"5", "6", "5", "163", "8", "8", "18", "9", "75", new ArrayList<String>() {{
-                        add("Площадь укладки:");
-                        add("Кол-во панелей:");
-                        add("Кол-во упаковок:");
-                        add("Стоимость:");
-                        add("Остатки:");
-                        add("Отрезки:");
+                    {"0", "0", "0", "0", "0", "0", "0", "0", new ArrayList<String>() {{
+                        add("РЕЗУЛЬТАТ РАСЧЕТА:");
+                        add("Площадь укладки: 145.04 м2.");
+                        add("Кол-во панелей: 31 шт.");
+                        add("Кол-во упаковок: 1 шт.");
+                        add("Стоимость: 4250000 руб.");
+                        add("Остатки: 69 шт.");
+                        add("Отрезки: 7 шт.");
                     }}}
             };
         }
