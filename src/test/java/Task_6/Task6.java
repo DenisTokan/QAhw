@@ -47,11 +47,7 @@ public class Task6 {
 
     @Test(priority = 3, dataProvider = "data")
     public void CheckPrice(List<String>expectedData) {
-        List<WebElement> results = driver.findElements(By.xpath("//div[@id='cart_contents_container']/div/div/div[3]//div[2]"));
-
-
-        System.out.println(driver.findElement(By.id("inventory_item_price")).getText());
-
+        List<WebElement> results = driver.findElements(By.xpath("//div[@id='cart_contents_container']/div/div/div[3]//div[2]//div[2]//div"));
         List<String> actualData = new ArrayList<String>() {{
             results.forEach((element) -> add(element.getText()));
         }};
@@ -63,11 +59,27 @@ public class Task6 {
         return new Object[][]{
                 {new ArrayList<String>() {
                     {
-                        add("Sauce Labs Backpack");
                         add("$29.99");
                     }
                 }}};
     }
+    @Test(priority = 4, dataProvider = "def")
+    public void CheckName(List<String>expectedData){
+        List<WebElement> result = driver.findElements(By.className("inventory_item_name"));
+        List<String> actualData = new ArrayList<String>(){{
+            result.forEach((element) -> add(element.getText()));
+        }};
+        Assert.assertEquals(actualData, expectedData);
+    }
+    @DataProvider(name = "def")
+    public static Object[][] getDef(){
+        return new Object[][]{
+                {new ArrayList<String>() {
+                    {
+                     add("Sauce Labs Backpack");
+                    }
+                }}};
+        }
                     @AfterTest
                     public void close() {
                         driver.quit();
