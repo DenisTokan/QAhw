@@ -1,15 +1,15 @@
 package Task_6;
 
-import org.testng.Assert;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 import org.testng.annotations.DataProvider;
-import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
