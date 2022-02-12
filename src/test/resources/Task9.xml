@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Task9">
+    <parameter name="browser" value="CHROME"/>
+    <parameter name="url" value="https://www.saucedemo.com/"/>
+
+    <test name="Task9">
+        <classes>
+            <class name="Task_9.Task9"/>
+        </classes>
+    </test>
+
+</suite>
